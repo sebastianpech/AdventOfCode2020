@@ -10,11 +10,16 @@ first(x*y*z for x in s, y in s, z in s if x+y+z==2020)
 using BenchmarkTools
 
 function part2(s)
-    _s = sort(s)
-    for x in _s
-        for y in _s
+    idx = sort(1:length(s),by=i->s[i])
+    for xi in idx
+        x = s[xi]
+        for yi in idx
+            yi == xi && continue
+            y = s[yi]
             x+y >= 2020 && break
-            for z in _s
+            for zi in idx
+                (zi == xi || zi == yi) && continue
+                z = s[zi]
                 x+y+z > 2020 && break
                 x+y+z == 2020 && return x*y*z
             end
