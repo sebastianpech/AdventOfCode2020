@@ -7,18 +7,6 @@ function contains_bag(line, bag)
     occursin(bag, content)
 end
 
-function content(line,fakt)
-    _, content = split(line," contain ")
-    d = Pair{String, Int}[]
-    content == "no other bags." && return d
-    for b in split(content,",")
-        _b = strip(b)
-        x = split(_b, " ")
-        push!(d,join(x[2:end-1]," ")*" bag" => parse(Int,x[1])*fakt)
-    end
-    d
-end
-
 bags = Set{String}()
 bags_to_check = ["shiny gold bag"]
 while length(bags_to_check) > 0
@@ -32,6 +20,18 @@ while length(bags_to_check) > 0
     end
 end
 length(bags)
+
+function content(line,fakt)
+    _, content = split(line," contain ")
+    d = Pair{String, Int}[]
+    content == "no other bags." && return d
+    for b in split(content,",")
+        _b = strip(b)
+        x = split(_b, " ")
+        push!(d,join(x[2:end-1]," ")*" bag" => parse(Int,x[1])*fakt)
+    end
+    d
+end
 
 bags_to_check = ["shiny gold bag"=>1]
 counter = 0
