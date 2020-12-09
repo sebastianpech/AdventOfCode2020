@@ -29,13 +29,10 @@ function part_2(code,target_number)
     start_index = 1
     end_index = 2
     while sum(code[start_index:end_index]) != target_number
-        # Increase end until at target or higher
         while sum(code[start_index:end_index]) < target_number
             end_index += 1
         end
-        # Check if at the number
         sum(code[start_index:end_index]) == target_number && break
-        # Redact start 
         while sum(code[start_index:end_index]) > target_number && start_index < end_index
             start_index += 1
         end
