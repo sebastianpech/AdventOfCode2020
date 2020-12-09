@@ -1,18 +1,9 @@
-using Base.Iterators
 data = parse.(Int,readlines("9.input"))
 
 function position_valid(code, pos, n)
-    number_pool = sort(code[pos-n:pos-1])
-    smalles_pos = number_pool[1]+number_pool[2]
-    largest_pos = number_pool[end-1]+number_pool[end]
-    target_no = code[pos]
-    target_no < smalles_pos && return false
-    target_no > largest_pos && return false
-    for i in 1:n
-        rem = target_no-number_pool[i]
-        for j in (i+1):n
-            number_pool[j] > rem && break
-            number_pool[j] == rem && return true
+    @inbounds for i in pos-n:pos-1
+        for j in (i+1):pos-1
+            code[i]+code[j] == code[pos] && return true
         end
     end
     return false
