@@ -1,7 +1,6 @@
 data = sort(parse.(Int,readlines("10.input")))
 
 # part 1 
-
 d = copy(data)
 insert!(d,1,0)
 push!(d,d[end]+3)
@@ -10,8 +9,7 @@ count(==(1),diff)*count(==(3),diff)
 
 # part 2
 function get_pos_comb(n)
-    n == 1 && return 1
-    n == 1 && return 1
+    n <= 1 && return 1
     n == 2 && return 2
     n == 3 && return 4
     last_three = [1,2,4]
