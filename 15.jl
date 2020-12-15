@@ -5,13 +5,12 @@ function part01(input; until_turn)
     for i in turn+1:until_turn
         n1, n2 = no_spoken[last_number]
         if n1 == 0
-            new_number = 0
+            last_number = 0
         else
-            new_number = n2-n1
+            last_number = n2-n1
         end
-        n1, n2 = get(no_spoken,new_number, (0,0))
-        no_spoken[new_number] = (n2, i)
-        last_number = new_number
+        _, n2 = get(no_spoken, last_number, (0,0))
+        no_spoken[last_number] = (n2, i)
     end
     return last_number
 end
